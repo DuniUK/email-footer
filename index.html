@@ -59,21 +59,54 @@
   <div id="signature">
     <h3>Preview</h3>
     <div id="signaturePreview"></div>
+<div style="margin-top: 20px;">
+  <button onclick="copySignature()" style="background-color: #007bff; color: #fff; padding: 10px 15px; font-size: 14px; border: none; cursor: pointer;">
+    Copy Signature to Clipboard
+  </button>
+</div>
+
     <h4>HTML Code (copy into email settings)</h4>
     <textarea id="signatureHTML" readonly></textarea>
   </div>
 
   <div style="margin-top: 30px; font-size: 14px;">
     <strong>How to use your new signature in Outlook:</strong>
-    <p>
-      1. Copy the signature preview above.<br>
-      2. Open Outlook and go to <strong>File > Options > Mail > Signatures</strong>.<br>
-      3. Click <strong>New</strong>, name your signature, and paste the copied HTML into the editor.<br>
-      4. Click <strong>OK</strong> to save. Your signature will now appear in new emails.
-    </p>
-  </div>
+  <p><u>For Outlook on Windows (PC):</u><br>
+    1. Click the "Copy Signature" button above.<br>
+    2. Open Outlook and go to <strong>File > Options > Mail > Signatures</strong>.<br>
+    3. Click <strong>New</strong>, name your signature, and paste (Ctrl+V) into the editor.<br>
+    4. Click <strong>OK</strong> to save.</p>
 
-  <script>
+  <p><u>For Outlook on Mac:</u><br>
+    1. Click the "Copy Signature" button above.<br>
+    2. Open Outlook and go to <strong>Outlook > Preferences > Signatures</strong>.<br>
+    3. Click <strong>+</strong>, name your signature, and paste (Cmd+V) into the editor.<br>
+    4. Close and assign the signature to new emails if needed.</p>
+</div>
+
+
+<script>
+  function copySignature() {
+    const temp = document.createElement("div");
+    temp.innerHTML = document.getElementById("signaturePreview").innerHTML;
+    document.body.appendChild(temp);
+
+    const range = document.createRange();
+    range.selectNode(temp);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+
+    try {
+      document.execCommand("copy");
+      alert("Signature copied to clipboard.");
+    } catch (err) {
+      alert("Failed to copy signature.");
+    }
+
+    window.getSelection().removeAllRanges();
+    document.body.removeChild(temp);
+  }
+
     document.getElementById("signatureForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const fullName = document.getElementById("fullName").value;
@@ -108,6 +141,8 @@
       document.getElementById("signaturePreview").innerHTML = signatureHTML;
       document.getElementById("signatureHTML").value = signatureHTML;
     });
-  </script>
+</script>
+
+
 </body>
 </html>
