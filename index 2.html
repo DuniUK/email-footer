@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Email Signature Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    form { display: flex; flex-direction: column; }
+    label { margin-top: 10px; display: flex; flex-direction: column; font-weight: bold; }
+    input { padding: 8px; font-size: 14px; margin-top: 5px; }
+    #signature { margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; }
+    textarea { width: 100%; height: 200px; margin-top: 10px; font-size: 13px; }
+    button {
+      background-color: #000000;
+      color: #FFFFFF;
+      padding: 20px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    img.logo-top {
+      max-width: 600px;
+      display: block;
+      margin: 0 auto 30px auto;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://d365wpn2efxxd6.cloudfront.net/smd-a2c61d033/public/dl?shr=9v54P-w0l4_-G7EqzOmFPu6e6zXgyFyAfICo2wPPZAQ&obj=oYYq6gGEK97Cu2hcbfqrAcJsMRDkEWcp9xetk25SrHY" alt="Duni Poppies Logo" class="logo-top">
+
+  <h2>Email Signature Generator</h2>
+  <form id="signatureForm">
+    <label>Full Name:
+      <input type="text" id="fullName" required>
+    </label>
+    <label>Job Title:
+      <input type="text" id="title" required>
+    </label>
+    <label>Company Name:
+      <input type="text" id="company" value="Duni Poppies Ltd" required>
+    </label>
+    <label><span>Phone Number: <em style="font-style: italic;" title="Remove the first 0 – it will be added automatically">(enter without starting 0)</em></span>
+      <input type="text" id="phone" placeholder="e.g. 1928 712377" required>
+    </label>
+    <label><span>Mobile Number: <em style="font-style: italic;" title="Remove the first 0 – it will be added automatically">(enter without starting 0)</em></span>
+      <input type="text" id="mobile" placeholder="e.g. 7887 688147">
+    </label>
+    <label>Email Address:
+      <input type="email" id="email" required>
+    </label>
+    <label>Logo URL:
+      <input type="text" id="logo" value="https://d365wpn2efxxd6.cloudfront.net/smd-a2c61d033/public/dl?shr=9v54P-w0l4_-G7EqzOmFPu6e6zXgyFyAfICo2wPPZAQ&obj=oYYq6gGEK97Cu2hcbfqrAcJsMRDkEWcp9xetk25SrHY" readonly>
+    </label>
+    <button type="submit">Generate Signature</button>
+  </form>
+
+  <div id="signature">
+    <h3>Preview</h3>
+    <div id="signaturePreview"></div>
+    <h4>HTML Code (copy into email settings)</h4>
+    <textarea id="signatureHTML" readonly></textarea>
+  </div>
+
+  <div style="margin-top: 30px; font-size: 14px;">
+    <strong>How to use your new signature in Outlook:</strong>
+    <p>
+      1. Copy the signature preview above.<br>
+      2. Open Outlook and go to <strong>File > Options > Mail > Signatures</strong>.<br>
+      3. Click <strong>New</strong>, name your signature, and paste the copied HTML into the editor.<br>
+      4. Click <strong>OK</strong> to save. Your signature will now appear in new emails.
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("signatureForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const fullName = document.getElementById("fullName").value;
+      const title = document.getElementById("title").value;
+      const company = document.getElementById("company").value;
+      const phone = document.getElementById("phone").value;
+      const mobile = document.getElementById("mobile").value;
+      const email = document.getElementById("email").value;
+      const logo = document.getElementById("logo").value;
+
+      let mobileRow = "";
+      if (mobile) {
+        mobileRow = `<tr><td>📱 +44 (0) ${mobile}</td></tr>`;
+      }
+
+      const signatureHTML = `
+<table cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; font-size: 14px; color: #000;">
+  <tr>
+    <td rowspan="6" style="padding-right: 15px;">
+      <img src="${logo}" alt="Duni Poppies Ltd" width="300">
+    </td>
+    <td><strong style="font-size: 16px;">${fullName}</strong></td>
+  </tr>
+  <tr><td>${title}</td></tr>
+  <tr><td>${company}</td></tr>
+  <tr><td>📞 +44 (0) ${phone}</td></tr>
+  ${mobileRow}
+  <tr><td>✉️ <a href="mailto:${email}" style="color: #000;">${email}</a></td></tr>
+</table>
+      `.trim();
+
+      document.getElementById("signaturePreview").innerHTML = signatureHTML;
+      document.getElementById("signatureHTML").value = signatureHTML;
+    });
+  </script>
+</body>
+</html>
