@@ -29,9 +29,10 @@
   </style>
 </head>
 <body>
-  <!-- Primary: serve from SAME repo (no cross-origin). Fallback: raw URL -->
+  <!-- Permanent logo via jsDelivr CDN (serves files directly from your public repo). -->
+  <!-- If you ever move the file, update the URL below. For immutability, you can pin to a specific commit SHA. -->
   <img
-    src="./assets/duni-poppies-logo.png"
+    src="https://cdn.jsdelivr.net/gh/duniuk/brand-assets@main/assets/duni-poppies-logo.png"
     alt="Duni Poppies Logo"
     class="logo-top"
     onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/duniuk/brand-assets/main/assets/duni-poppies-logo.png';"
@@ -58,8 +59,10 @@
       <input type="email" id="email" required>
     </label>
     <label>Logo URL:
-      <!-- Default to local Pages asset; users can override if needed -->
-      <input type="text" id="logo" value="https://duniuk.github.io/email-footer/assets/duni-poppies-logo.png" readonly>
+      <!-- Default to the same permanent CDN URL so generated signatures use it too -->
+      <input type="text" id="logo"
+        value="https://cdn.jsdelivr.net/gh/duniuk/brand-assets@main/assets/duni-poppies-logo.png"
+        readonly>
     </label>
     <button type="submit">Generate Signature</button>
   </form>
@@ -79,18 +82,18 @@
 
   <div style="margin-top: 30px; font-size: 14px;">
     <strong>How to use your new signature in Outlook:</strong>
-    <p><u>For Outlook on Windows (PC):</u><br>
-      1. Click the "Copy Signature" button above.<br>
-      2. Open Outlook and go to <strong>File > Options > Mail > Signatures</strong>.<br>
-      3. Click <strong>New</strong>, name your signature, and paste (Ctrl+V) into the editor.<br>
-      4. Click <strong>OK</strong> to save.</p>
+  <p><u>For Outlook on Windows (PC):</u><br>
+    1. Click the "Copy Signature" button above.<br>
+    2. Open Outlook and go to <strong>File > Options > Mail > Signatures</strong>.<br>
+    3. Click <strong>New</strong>, name your signature, and paste (Ctrl+V) into the editor.<br>
+    4. Click <strong>OK</strong> to save.</p>
 
-    <p><u>For Outlook on Mac:</u><br>
-      1. Click the "Copy Signature" button above.<br>
-      2. Open Outlook and go to <strong>Outlook > Preferences > Signatures</strong>.<br>
-      3. Click <strong>+</strong>, name your signature, and paste (Cmd+V) into the editor.<br>
-      4. Close and assign the signature to new emails if needed.</p>
-  </div>
+  <p><u>For Outlook on Mac:</u><br>
+    1. Click the "Copy Signature" button above.<br>
+    2. Open Outlook and go to <strong>Outlook > Preferences > Signatures</strong>.<br>
+    3. Click <strong>+</strong>, name your signature, and paste (Cmd+V) into the editor.<br>
+    4. Close and assign the signature to new emails if needed.</p>
+</div>
 
 <script>
   function copySignature() {
