@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,19 +20,17 @@
       margin-top: 20px;
     }
     img.logo-top {
-      max-width: 600px;
+      max-width: 200px;
+      height: auto;
       display: block;
-      margin: 0 auto 30px auto;
+      margin: 0 auto 20px auto;
     }
   </style>
 </head>
 <body>
-  <img src="logo.png" alt="Duni Poppies Logo" class="logo-top">
-...
-<label>Logo URL:
-  <input type="text" id="logo" value="logo.png" readonly>
-</label>
-
+  <!-- Fixed permanent logo (GitHub raw URL) -->
+  <img src="https://raw.githubusercontent.com/duniuk/brand-assets/main/assets/duni-poppies-logo.png"
+       alt="Duni Poppies Logo" class="logo-top">
 
   <h2>Email Signature Generator</h2>
   <form id="signatureForm">
@@ -56,7 +53,10 @@
       <input type="email" id="email" required>
     </label>
     <label>Logo URL:
-      <input type="text" id="logo" value="https://d365wpn2efxxd6.cloudfront.net/smd-a2c61d033/public/dl?shr=9v54P-w0l4_-G7EqzOmFPu6e6zXgyFyAfICo2wPPZAQ&obj=lcedoVWxWb3zUIlRFHdDMkLxJ4pvxphUfj3UnlSJHMg" readonly>
+      <!-- Default logo URL updated to match the fixed header logo -->
+      <input type="text" id="logo"
+        value="https://raw.githubusercontent.com/duniuk/brand-assets/main/assets/duni-poppies-logo.png"
+        readonly>
     </label>
     <button type="submit">Generate Signature</button>
   </form>
@@ -64,11 +64,11 @@
   <div id="signature">
     <h3>Preview</h3>
     <div id="signaturePreview"></div>
-<div style="margin-top: 20px;">
-  <button onclick="copySignature()" style="background-color: #007bff; color: #fff; padding: 10px 15px; font-size: 14px; border: none; cursor: pointer;">
-    Copy Signature to Clipboard
-  </button>
-</div>
+    <div style="margin-top: 20px;">
+      <button onclick="copySignature()" style="background-color: #007bff; color: #fff; padding: 10px 15px; font-size: 14px; border: none; cursor: pointer;">
+        Copy Signature to Clipboard
+      </button>
+    </div>
 
     <h4>HTML Code (copy into email settings)</h4>
     <textarea id="signatureHTML" readonly></textarea>
@@ -88,7 +88,6 @@
     3. Click <strong>+</strong>, name your signature, and paste (Cmd+V) into the editor.<br>
     4. Close and assign the signature to new emails if needed.</p>
 </div>
-
 
 <script>
   function copySignature() {
@@ -112,26 +111,26 @@
     document.body.removeChild(temp);
   }
 
-    document.getElementById("signatureForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const fullName = document.getElementById("fullName").value;
-      const title = document.getElementById("title").value;
-      const company = document.getElementById("company").value;
-      const phone = document.getElementById("phone").value;
-      const mobile = document.getElementById("mobile").value;
-      const email = document.getElementById("email").value;
-      const logo = document.getElementById("logo").value;
+  document.getElementById("signatureForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const fullName = document.getElementById("fullName").value;
+    const title = document.getElementById("title").value;
+    const company = document.getElementById("company").value;
+    const phone = document.getElementById("phone").value;
+    const mobile = document.getElementById("mobile").value;
+    const email = document.getElementById("email").value;
+    const logo = document.getElementById("logo").value;
 
-      let mobileRow = "";
-      if (mobile) {
-        mobileRow = `<tr><td>📱 +44 (0) ${mobile}</td></tr>`;
-      }
+    let mobileRow = "";
+    if (mobile) {
+      mobileRow = `<tr><td>📱 +44 (0) ${mobile}</td></tr>`;
+    }
 
-      const signatureHTML = `
+    const signatureHTML = `
 <table cellpadding="0" cellspacing="0" style="font-family: Arial, sans-serif; font-size: 14px; color: #000;">
   <tr>
     <td rowspan="6" style="padding-right: 15px;">
-      <img src="${logo}" alt="Duni Poppies Ltd" width="300">
+      <img src="${logo}" alt="Duni Poppies Ltd" style="max-width:200px; height:auto; display:block;">
     </td>
     <td><strong style="font-size: 16px;">${fullName}</strong></td>
   </tr>
@@ -141,13 +140,11 @@
   ${mobileRow}
   <tr><td>✉️ <a href="mailto:${email}" style="color: #000;">${email}</a></td></tr>
 </table>
-      `.trim();
+    `.trim();
 
-      document.getElementById("signaturePreview").innerHTML = signatureHTML;
-      document.getElementById("signatureHTML").value = signatureHTML;
-    });
+    document.getElementById("signaturePreview").innerHTML = signatureHTML;
+    document.getElementById("signatureHTML").value = signatureHTML;
+  });
 </script>
-
-
 </body>
 </html>
